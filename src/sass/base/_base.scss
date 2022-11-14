@@ -1,0 +1,30 @@
+
+$default-font-size: 1.6rem;
+
+*,
+*::after,
+*::before{
+    margin: 0; padding: 0;
+    box-sizing: inherit;
+}
+p, h1, h2, h3, h4, h5, h6{
+    margin: 0; 
+    padding: 0;
+}
+html{
+    font-size: 62.5%; //10px
+}
+
+body{
+    box-sizing: border-box;
+    font-size: $default-font-size!important;
+    font-family: "Google Sans"!important;
+    position: relative;
+}
+
+.container{
+    max-width: 123rem!important;
+    width: auto;
+    padding-left: 1.6rem!important;
+    padding-right: 1.6rem!important;
+}

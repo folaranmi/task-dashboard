@@ -1,0 +1,16 @@
+@mixin font-props($family, $fontsize, $fontweight, $fontcolor){
+    font-family: $family;
+    font-size: $fontsize;
+    font-weight: $fontweight;
+    color: $fontcolor;
+}
+
+@mixin flexy($direction, $justify-content, $align-items) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+
+
