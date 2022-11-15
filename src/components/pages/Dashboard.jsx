@@ -87,8 +87,54 @@ function Dashboard() {
             {/* Completed task line  chart */}
 
             <div className="card task-chartbox">
-
+              <div className="headercon">
+                <h3 className="section-title">Task Done</h3>
+                <ul className="duration">
+                  <li className='duration__list'>Daily</li>
+                  <li className='duration__list'>Weekly</li>
+                  <li className='duration__list active'>Monthly</li>
+                </ul>
+              </div>
             </div>
+
+
+            {/* List of task */}
+
+            <div className="card taskbox">
+              <div className="headercon">
+                <h3 className="section-title">Task</h3>
+                
+                <div className="filterbox">
+
+                </div>
+              </div>
+
+              <table className="table">
+                <thead>
+                  <tr>
+                  <td>Name Of Task</td>
+                  <td>Start Date</td>
+                  <td>End Date</td>
+                  <td>Hours</td>
+                  <td>Progress</td>
+                  <td>Actions</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>User journey of the project</td>
+                    <td>Jan 1, 2022</td>
+                    <td>Feb 1, 2022</td>
+                    <td>80</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+
           </main>
           <aside className='aside'>
 
