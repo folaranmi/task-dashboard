@@ -83,6 +83,12 @@ function Dashboard() {
               </div>
 
             </div>
+
+            {/* Completed task line  chart */}
+
+            <div className="card task-chartbox">
+
+            </div>
           </main>
           <aside className='aside'>
 

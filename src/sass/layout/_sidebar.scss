@@ -3,7 +3,8 @@
 .sidebar{
     width: 9.4rem;
     min-height: 100vh;
-    height: 100%;
+    height: auto;
+    // position: fixed;
     background-color: v.$grey-color-200;
 
     display: flex;
