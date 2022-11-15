@@ -1,8 +1,91 @@
+@use '../abstract/variables' as v;
 
-.content{
-    width: 500px;
-    height: 200px;
-    background-color: grey;
-    color: yellowgreen;
-    font-family: 'DM Sans';
+.dashboard{
+    width: 100%;
+    display: flex;
+
+    .main{
+        padding: 2.2rem 4rem;
+        min-height: calc(100vh - 7.6rem);
+    }
+
+    .aside{
+        flex-basis: 39.6rem;
+        height: auto;
+        min-height: calc(100vh - 7.6rem);
+        display: flex;
+        position: relative;
+        background-color: v.$white;
+    }
+
+    .card{
+        width: 100%;
+        background-color: v.$white;
+        border-radius: 1.6rem;
+    }
+
+    .task-cards-con{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        gap: 2.4rem;
+
+        .task-card {
+            flex-basis: 31%;
+            height: 17.3rem;
+            padding: 2.2rem 2rem;
+
+            .headercon{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid v.$grey-color-300;
+                padding-bottom: 2.4rem;
+                margin-bottom: 1.1rem;
+
+                .iconbox{
+                    display: flex;
+                    gap: 1.2rem;
+                    align-items: center;
+
+                    .text{
+                        color: v.$grey-color-600;
+                        font-weight: 500;
+                    }
+                }
+
+                .counter{
+                    color: v.$grey-color-500;
+                    font-size: 2.2rem;
+                    font-weight: 700;
+                }
+            }
+
+            .details{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .sparkline{
+                    width: 8rem;
+                    img{
+                        margin-top: .4rem;
+                    }
+                }
+
+                .infobox{
+                    font-weight: 500;
+                    color: v.$grey-color-700;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+
+                    .more{
+                        color: v.$primary-color-400;
+                    }
+                }
+            }
+        }
+    }
 }

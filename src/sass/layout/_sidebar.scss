@@ -1,0 +1,52 @@
+@use '../abstract/variables' as v;
+
+.sidebar{
+    width: 9.4rem;
+    min-height: 100vh;
+    height: 100%;
+    background-color: v.$grey-color-200;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    gap: 13.8rem;
+
+    .logo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        height: 6rem;
+        margin-top: 2.498rem;
+
+        img{
+            width: 3.4rem;
+        }
+    }
+
+    &__nav{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &--list{
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            
+
+            .nav-link{
+                padding: 1.2rem;
+                display: flex;
+                border-radius: 1.4rem;
+
+                &.active{
+                    background-color: v.$primary-color-300;
+                }
+            }
+        }
+    }
+}
