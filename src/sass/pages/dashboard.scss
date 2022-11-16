@@ -139,6 +139,24 @@
             padding-bottom: 7.7rem;
         }
 
+        .empty{
+            @include m.flexy(column, center, center);
+            width: 100%;
+            min-height: 11rem;
+            gap: 1.4rem;
+            .title{
+                font-weight: 700;
+                font-size: 2rem;
+                color: v.$primary-color-300;
+            }
+
+            .subtitle{
+                font-weight: 500;
+                font-size: 1.6rem;
+                color: v.$grey-color-700;
+            }
+        }
+
     }
 
 

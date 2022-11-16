@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MainLayout from '../../layout/MainLayout';
 
 import TaskCompleted from '../../../assets/img/icons/task-completed-icon.svg';
@@ -12,11 +12,69 @@ import Calendar from '../../../assets/img/icons/calendar-icon.svg';
 import Kelvin from '../../../assets/img/icons/kelvin.png';
 import Webber from '../../../assets/img/icons/webber.png';
 // import Chris from '../../../assets/img/icons/chris.png';
-import NewTaskForm from './NewTaskForm';
+// import NewTaskForm from './NewTaskForm';
+
+import { useFormik } from 'formik'
+import * as yup from 'yup';
 
 function Dashboard() {
 
   const [showMore, setShowMore] = useState(false);
+
+  // const getTodos = localStorage.getItem('todos')
+  // const todos = getTodos ? JSON.parse(getTodos) : [];
+
+  // get todos data
+
+  const getTodos = () => {
+    const todos = localStorage.getItem('todos');
+    return todos ? JSON.parse(todos) : []
+  }
+
+  const [todos, setTodos] = useState(getTodos());
+
+  // Saving todos data to local storage
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos])
+
+
+
+  const { handleSubmit, errors, touched, values, handleChange } = useFormik({
+    // Set initial values
+    initialValues: {
+      taskTitle: '',
+      startDate: '',
+      endDate: '',
+      hourBudgeted: ''
+    },
+
+    // Set validation rules
+    validationSchema: yup.object({
+      taskTitle: yup.string().required('Give your task a name'),
+      startDate: yup.date().required('Enter a start date'),
+      endDate: yup.date().required('Enter an end date'),
+      hourBudgeted: yup.string().required('Enter a budgeted hour'),
+    }),
+
+    // This excute when the form is submitted
+    onSubmit: (values, onSubmitProps) => {
+      console.log(values);
+      let todo = {
+        taskTitle: values.taskTitle,
+        startDate: values.startDate,
+        endDate: values.endDate,
+        hourBudgeted: values.hourBudgeted,
+        done: false,
+      }
+
+      setTodos([...todos, todo]);
+      onSubmitProps.resetForm();
+
+    }
+  })
+
+
   return (
     <MainLayout>
       <div className="dashboard">
@@ -121,59 +179,55 @@ function Dashboard() {
 
             <table className="table">
               <thead>
-                <tr>
+                {todos.length > 0 && <tr>
                   <th scope='col'>Name Of Task</th>
                   <th scope='col'>Start Date</th>
                   <th scope='col'>End Date</th>
                   <th scope='col'>Hours</th>
                   <th scope='col'>Progress</th>
                   <th scope='col'>Actions</th>
-                </tr>
+                </tr>}
               </thead>
 
               <tbody>
 
-                <tr>
-                  <td>Wireframing the project</td>
-                  <td>Feb 1, 2022</td>
-                  <td>Feb 28, 2022</td>
-                  <td>80</td>
-                  <td className='flex'>
-                    <div for="task-status" className='status'>60% complete</div>
-                    <progress id="task-status" value="60" max="100"> </progress>
-                  </td>
-                  <td>
-                    <div className="morebox">
-                      <img src={MoreIconVertical} alt="more icon" onClick={() => setShowMore(!showMore)} />
-                      {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`}>
-                        <div className='action'>Complete</div>
-                        <div className='action'>Edit</div>
-                        <div className='action'>Delete</div>
-                      </div>}
-                    </div>
-                  </td>
-                </tr>
+                <>
+                  {todos.length > 0 &&
+                    <>
+                      {todos.map((todo, index) => (
+                        <tr key={index}>
+                          <td>{todo.taskTitle}</td>
+                          <td>{todo.startDate}</td>
+                          <td>{todo.endDate}</td>
+                          <td>{todo.hourBudgeted}</td>
+                          <td className='flex'>
+                            <div className='status'>60% complete</div>
+                            <progress id="task-status" value="60" max="100"> </progress>
+                          </td>
+                          <td>
+                            <div className="morebox">
+                              <img src={MoreIconVertical} alt="more icon" onClick={() => setShowMore(!showMore)} />
+                              {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`}>
+                                <div className='action'>Complete</div>
+                                <div className='action'>Edit</div>
+                                <div className='action'>Delete</div>
+                              </div>}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </>
 
-                <tr>
-                  <td>User journey of the projects bdjkgbdkjbgsk jbgksdjgbksdjfb dgkjdbkgjrbgkbjdasbk ajsdfbabjskdbfjkasd</td>
-                  <td>Jan 1, 2022</td>
-                  <td>Feb 1, 2022</td>
-                  <td>80</td>
-                  <td className='flex'>
-                    <div for="task-status" className='status'>60% complete</div>
-                    <progress id="task-status" value="60" max="100"> </progress>
-                  </td>
-                  <td>
-                    <div className="morebox">
-                      <img src={MoreIconVertical} alt="more icon" onClick={() => setShowMore(!showMore)} />
-                      {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`} >
-                        <div>Complete</div>
-                        <div>Edit</div>
-                        <div>Delete</div>
-                      </div>}
+                  }
+
+                  {todos.length === 0 && (
+                    <div className='empty'>
+                      <p className='title'>No Task added</p>
+                      <span className='subtitle'>Task will show here when you have one.</span>
                     </div>
-                  </td>
-                </tr>
+                  )}
+                </>
+
               </tbody>
 
 
@@ -197,12 +251,84 @@ function Dashboard() {
             <img src={MoreIconHorizontal} alt="" />
           </div>
 
-          <NewTaskForm />
+          {/* Form section */}
 
+          {/* <NewTaskForm /> */}
+
+          <div className=''>
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label className='form-label'>Task Title</label>
+                <input
+                  type="text"
+                  name="taskTitle"
+                  id="task-title"
+                  placeholder='Create new'
+                  className='form-control'
+                  onChange={handleChange}
+                  value={values.taskTitle}
+                />
+                {errors.taskTitle && touched.taskTitle ? (<div className='error'>{errors.taskTitle}</div>) : null}
+
+              </div>
+
+              <div className="divider"></div>
+
+              <div className="form-group">
+                <label className='form-label'>Time To Complete</label>
+                <input
+                  type="date"
+                  name="startDate"
+                  id="start_date"
+                  placeholder='Start date'
+                  className='form-control'
+                  onChange={handleChange}
+                  value={values.startDate}
+                />
+                {errors.startDate && touched.startDate ? (<div className='error'>{errors.startDate}</div>) : null}
+
+                <input
+                  type="date"
+                  name="endDate"
+                  id="end_date"
+                  placeholder='End date'
+                  className='form-control'
+                  onChange={handleChange}
+                  value={values.endDate}
+                />
+                {errors.endDate && touched.endDate ? (<div className='error'>{errors.endDate}</div>) : null}
+              </div>
+
+              <div className="divider"></div>
+
+              <div className="form-group">
+                <label className='form-label'>Hours Budgeted</label>
+                <input
+                  type="text"
+                  name="hourBudgeted"
+                  id="hours"
+                  placeholder='Enter Hours'
+                  className='form-control'
+                  onChange={handleChange}
+                  value={values.hourBudgeted}
+                />
+                {errors.hourBudgeted && touched.hourBudgeted ? (<div className='error'>{errors.hourBudgeted}</div>) : null}
+              </div>
+
+              <div className="form-group savebtn">
+                <button type='submit' className='btn btn-primary' >Save</button>
+              </div>
+
+              <div className="divider"></div>
+            </form>
+          </div>
+
+
+          {/* Messages section */}
           <div className="headercon">
             <h2 className="heading mbottom">Messages</h2>
           </div>
-          
+
 
           <div className="messagebox">
             <div className="user-photo">
