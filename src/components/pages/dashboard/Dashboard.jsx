@@ -11,6 +11,7 @@ import DashboardLite from '../../../assets/img/icons/dashboard-light.svg';
 import Calendar from '../../../assets/img/icons/calendar-icon.svg';
 import Kelvin from '../../../assets/img/icons/kelvin.png';
 import Webber from '../../../assets/img/icons/webber.png';
+import dateFormat from 'dateformat';
 // import Chris from '../../../assets/img/icons/chris.png';
 // import NewTaskForm from './NewTaskForm';
 
@@ -197,8 +198,8 @@ function Dashboard() {
                       {todos.map((todo, index) => (
                         <tr key={index}>
                           <td>{todo.taskTitle}</td>
-                          <td>{todo.startDate}</td>
-                          <td>{todo.endDate}</td>
+                          <td>{dateFormat(todo.startDate, "mmm d, yyyy")}</td>
+                          <td>{dateFormat(todo.endDate, "mmm d, yyyy")}</td>
                           <td>{todo.hourBudgeted}</td>
                           <td className='flex'>
                             <div className='status'>60% complete</div>
