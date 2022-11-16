@@ -1,0 +1,138 @@
+@use '../abstract/variables' as v;
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        font-weight: 700;
+        text-align: left;
+        color: v.$grey-color-700;
+
+        tr {
+            width: 100%;
+            border-bottom: 1px solid v.$grey-color-300;
+
+            th {
+                padding: 1.2rem;
+            }
+
+            th:first-child {
+                padding-left: 0;
+            }
+
+            th:last-child {
+                padding-right: 0;
+            }
+
+            th:nth-child(1) {
+                width: 30%;
+            }
+        }
+
+
+    }
+
+    tbody {
+
+
+        tr {
+            color: v.$grey-color-500;
+            font-size: 1.4rem;
+            font-weight: 500;
+            width: 100%;
+            border-bottom: 1px solid v.$grey-color-300;
+
+            td:first-child {
+                padding-left: 0;
+            }
+
+            td:last-child {
+                padding-right: 0;
+            }
+
+            td:nth-child(1) {
+                width: 25%;
+            }
+
+            td:nth-child(2) {
+                width: 15%;
+            }
+
+            td:nth-child(3) {
+                width: 15%;
+            }
+
+            td {
+                padding: 1.2rem;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .morebox {
+
+                position: relative;
+
+                img{cursor: pointer;}
+ 
+                .optionbox {
+                    // display: none;
+                    position: absolute;
+                    background: v.$white;
+                    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+                    border-radius: 1rem;
+                    height: auto;
+                    min-width: 7.9rem;
+                    padding: .7rem 1.5rem;
+                    z-index: 2;
+                    color: v.$grey-color-400;
+
+                    .action{
+                        cursor: pointer;
+
+                        &:hover{
+                            color: v.$grey-color-500;
+
+                            &:last-child{
+                                color: red;
+                            }
+                        }
+                    }
+
+                    &.active {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .4rem;
+                    }
+                }
+            }
+
+            progress {
+                background-color: v.$primary-color-200;
+                height: .5rem;
+                border-radius: 1.6rem;
+              }
+              progress::-webkit-progress-bar {
+                background-color: v.$grey-color-800;
+                border-radius: 1.6rem;
+              }
+              progress::-webkit-progress-value {
+                background-color: v.$primary-color-200;
+                border-radius: 1.6rem;
+              }
+              progress::-moz-progress-bar {
+                background-color: v.$grey-color-800;
+                border-radius: 1.6rem;
+              }
+
+              .status{
+                color: v.$primary-color-200;
+              }
+        }
+    }
+
+
+
+}
