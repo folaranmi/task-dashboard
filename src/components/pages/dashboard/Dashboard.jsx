@@ -25,6 +25,7 @@ function Dashboard() {
   // const getTodos = localStorage.getItem('todos')
   // const todos = getTodos ? JSON.parse(getTodos) : [];
 
+
   // get todos data
 
   const getTodos = () => {
@@ -32,7 +33,17 @@ function Dashboard() {
     return todos ? JSON.parse(todos) : []
   }
 
+
   const [todos, setTodos] = useState(getTodos());
+
+  // Delete todo
+  const deleteTodo = (id) => {
+    const newTodos = todos.filter((todo) => {
+      return todo.id !== id
+    })
+
+    setTodos(newTodos);
+  }
 
   // Saving todos data to local storage
   useEffect(() => {
@@ -60,8 +71,9 @@ function Dashboard() {
 
     // This excute when the form is submitted
     onSubmit: (values, onSubmitProps) => {
-      console.log(values);
+
       let todo = {
+        id: Math.floor(Math.random() * 1000),
         taskTitle: values.taskTitle,
         startDate: values.startDate,
         endDate: values.endDate,
@@ -196,7 +208,7 @@ function Dashboard() {
                   {todos.length > 0 &&
                     <>
                       {todos.map((todo, index) => (
-                        <tr key={index}>
+                        <tr key={todo.id}>
                           <td>{todo.taskTitle}</td>
                           <td>{dateFormat(todo.startDate, "mmm d, yyyy")}</td>
                           <td>{dateFormat(todo.endDate, "mmm d, yyyy")}</td>
@@ -211,7 +223,7 @@ function Dashboard() {
                               {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`}>
                                 <div className='action'>Complete</div>
                                 <div className='action'>Edit</div>
-                                <div className='action'>Delete</div>
+                                <div className='action' onClick={() => deleteTodo(todo.id)}>Delete</div>
                               </div>}
                             </div>
                           </td>
