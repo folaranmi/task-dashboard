@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
-import MainLayout from '../layout/MainLayout';
+import MainLayout from '../../layout/MainLayout';
 
-import TaskCompleted from '../../assets/img/icons/task-completed-icon.svg';
-import NewTask from '../../assets/img/icons/new-task-icon.svg';
-import ProjectDone from '../../assets/img/icons/project-done-icon.svg';
-import Sparkline from '../../assets/img/icons/sparkline.svg';
-import MoreIcon from '../../assets/img/icons/more-icon.svg';
+import TaskCompleted from '../../../assets/img/icons/task-completed-icon.svg';
+import NewTask from '../../../assets/img/icons/new-task-icon.svg';
+import ProjectDone from '../../../assets/img/icons/project-done-icon.svg';
+import Sparkline from '../../../assets/img/icons/sparkline.svg';
+import MoreIconVertical from '../../../assets/img/icons/more-icon.svg';
+import MoreIconHorizontal from '../../../assets/img/icons/more-icon-horizontal.svg';
+import DashboardLite from '../../../assets/img/icons/dashboard-light.svg';
+import Calendar from '../../../assets/img/icons/calendar-icon.svg';
+import Kelvin from '../../../assets/img/icons/kelvin.png';
+import Webber from '../../../assets/img/icons/webber.png';
+// import Chris from '../../../assets/img/icons/chris.png';
+import NewTaskForm from './NewTaskForm';
 
 function Dashboard() {
 
@@ -137,8 +144,8 @@ function Dashboard() {
                   </td>
                   <td>
                     <div className="morebox">
-                      <img src={MoreIcon} alt="more icon" onClick={() => setShowMore(!showMore)} />
-                      {showMore && <div className={`optionbox ${showMore ? 'active' : '' }`}>
+                      <img src={MoreIconVertical} alt="more icon" onClick={() => setShowMore(!showMore)} />
+                      {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`}>
                         <div className='action'>Complete</div>
                         <div className='action'>Edit</div>
                         <div className='action'>Delete</div>
@@ -158,8 +165,8 @@ function Dashboard() {
                   </td>
                   <td>
                     <div className="morebox">
-                      <img src={MoreIcon} alt="more icon" onClick={() => setShowMore(!showMore)} />
-                      {showMore && <div className={`optionbox ${showMore ? 'active' : '' }`} >
+                      <img src={MoreIconVertical} alt="more icon" onClick={() => setShowMore(!showMore)} />
+                      {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`} >
                         <div>Complete</div>
                         <div>Edit</div>
                         <div>Delete</div>
@@ -177,6 +184,45 @@ function Dashboard() {
 
         </main>
         <aside className='aside'>
+          <div className="headercon">
+            <h2 className="heading">Today's Scheudle</h2>
+            <div className="iconbox">
+              <img src={DashboardLite} alt="" />
+              <img src={Calendar} alt="" />
+            </div>
+          </div>
+
+          <div className="headercon mtop">
+            <h2 className="heading">New Task</h2>
+            <img src={MoreIconHorizontal} alt="" />
+          </div>
+
+          <NewTaskForm />
+
+          <div className="headercon">
+            <h2 className="heading mbottom">Messages</h2>
+          </div>
+          
+
+          <div className="messagebox">
+            <div className="user-photo">
+              <img src={Webber} alt="" />
+            </div>
+            <div className="message">
+              <div className="message__sender">Chris Webber</div>
+              <div className="message__body">Hi Michael! How are You?</div>
+            </div>
+          </div>
+
+          <div className="messagebox">
+            <div className="user-photo">
+              <img src={Kelvin} alt="" />
+            </div>
+            <div className="message">
+              <div className="message__sender">Kelvin Durant </div>
+              <div className="message__body">Do you need that design?</div>
+            </div>
+          </div>
 
         </aside>
       </div>

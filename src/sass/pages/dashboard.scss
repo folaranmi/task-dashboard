@@ -1,4 +1,5 @@
 @use '../abstract/variables' as v;
+@use '../abstract/mixins' as m;
 
 .dashboard{
     width: 100%;
@@ -133,6 +134,77 @@
         min-height: 37rem;
         margin: 2.2rem 0;
         padding: 2.4rem;
+
+        .headercon{
+            padding-bottom: 7.7rem;
+        }
+
+    }
+
+
+    .aside{
+        padding: 3.3rem 2rem;
+        display: flex;
+        flex-direction: column;
+
+        .headercon{
+            display: flex;
+            justify-content: space-between;
+
+
+            .iconbox{
+                min-width: 7.8rem;
+                border-radius: 1.45rem;
+                background-color: v.$grey-color-900;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: .7rem;
+                gap: 1.5rem;
+
+                img{
+                    cursor: pointer;
+                }
+            }
+
+            &.mtop{
+                margin-top: 2.8rem;
+                margin-bottom: 1.8rem;
+            }
+            
+        }
+
+        .heading{
+            color: v.$primary-color-300;
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+
+            &.mbottom{
+                margin-bottom: 1.7rem;
+            }
+        }
+
+        .messagebox{
+            @include m.flexy(row, flex-start, center);
+            gap: 1.4rem;
+            margin-bottom: 1.8rem;
+
+            .message{
+                font-size: 1.4rem;
+                &__sender{
+                    color: v.$primary-color-300;
+                    font-weight: 700;
+                    margin-bottom: 0.5rem;
+                }
+
+                &__body{
+                    color: v.$grey-color-700;
+                    font-weight: 500;
+                }
+            }
+        }
 
     }
 }

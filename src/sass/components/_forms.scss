@@ -1,0 +1,46 @@
+@use '../abstract/variables' as v;
+
+.form{
+
+    &-group{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.8rem;
+    }
+
+    &-control{
+        width: 100%;
+        height: 4rem;
+        background-color: v.$grey-color-300;
+        border-radius: .7rem;
+        color: v.$grey-color-400;
+        font-size: 1.3rem;
+        font-weight: 500;
+        outline: none;
+        border: none;
+        // margin-top: 1.8rem;
+        padding: 1.2rem 1.1rem;
+
+        &::placeholder{
+            color: v.$grey-color-400;
+        }
+    }
+
+    &-label{
+        color: v.$grey-color-700;
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    .divider{
+        width: 100%;
+        border-bottom: 1px solid v.$grey-color-300;
+        margin: 1.6rem 0;
+    }
+
+    .savebtn{
+        align-items: flex-end;
+        padding-top: 2rem;
+    }
+}

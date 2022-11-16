@@ -1,0 +1,19 @@
+@use '../abstract/variables' as v;
+
+.btn{
+
+    outline: none;
+    border: none;
+    border-radius: .7rem;
+
+    &-primary{
+        background: v.$primary-color-300;
+        color: v.$white;
+        font-weight: 500;
+        padding: .9rem 2rem;
+    }
+
+    &:disabled{
+        background-color: v.$grey-color-800;
+    }
+}
