@@ -12,19 +12,17 @@ import Calendar from '../../../assets/img/icons/calendar-icon.svg';
 import Kelvin from '../../../assets/img/icons/kelvin.png';
 import Webber from '../../../assets/img/icons/webber.png';
 import dateFormat from 'dateformat';
+// import { Line } from 'react-chartjs-2';
 // import Chris from '../../../assets/img/icons/chris.png';
 // import NewTaskForm from './NewTaskForm';
 
 import { useFormik } from 'formik'
 import * as yup from 'yup';
+import LineChart from './LineChart';
 
 function Dashboard() {
 
   const [showMore, setShowMore] = useState(false);
-
-  // const getTodos = localStorage.getItem('todos')
-  // const todos = getTodos ? JSON.parse(getTodos) : [];
-
 
   // get todos data
 
@@ -49,7 +47,6 @@ function Dashboard() {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos])
-
 
 
   const { handleSubmit, errors, touched, values, handleChange } = useFormik({
@@ -176,6 +173,10 @@ function Dashboard() {
                 <li className='duration__list active'>Monthly</li>
               </ul>
             </div>
+
+            <div className="chart">
+              <LineChart />
+            </div>
           </div>
 
 
@@ -190,62 +191,55 @@ function Dashboard() {
               </div>
             </div>
 
-            <table className="table">
+            {todos.length > 0 && <table className="table">
               <thead>
-                {todos.length > 0 && <tr>
+                <tr>
                   <th scope='col'>Name Of Task</th>
                   <th scope='col'>Start Date</th>
                   <th scope='col'>End Date</th>
                   <th scope='col'>Hours</th>
                   <th scope='col'>Progress</th>
                   <th scope='col'>Actions</th>
-                </tr>}
+                </tr>
               </thead>
 
               <tbody>
+                {todos.map((todo, index) => (
 
-                <>
-                  {todos.length > 0 &&
-                    <>
-                      {todos.map((todo, index) => (
-                        <tr key={todo.id}>
-                          <td>{todo.taskTitle}</td>
-                          <td>{dateFormat(todo.startDate, "mmm d, yyyy")}</td>
-                          <td>{dateFormat(todo.endDate, "mmm d, yyyy")}</td>
-                          <td>{todo.hourBudgeted}</td>
-                          <td className='flex'>
-                            <div className='status'>60% complete</div>
-                            <progress id="task-status" value="60" max="100"> </progress>
-                          </td>
-                          <td>
-                            <div className="morebox">
-                              <img src={MoreIconVertical} alt="more icon" onClick={() => setShowMore(!showMore)} />
-                              {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`}>
-                                <div className='action'>Complete</div>
-                                <div className='action'>Edit</div>
-                                <div className='action' onClick={() => deleteTodo(todo.id)}>Delete</div>
-                              </div>}
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </>
+                  <tr key={todo.id}>
+                    <td>{todo.taskTitle}</td>
+                    <td>{dateFormat(todo.startDate, "mmm d, yyyy")}</td>
+                    <td>{dateFormat(todo.endDate, "mmm d, yyyy")}</td>
+                    <td>{todo.hourBudgeted}</td>
+                    <td className='flex'>
+                      <div className='status'>60% complete</div>
+                      <progress id="task-status" value="60" max="100"> </progress>
+                    </td>
+                    <td>
+                      <div className="morebox">
+                        <img src={MoreIconVertical} alt="more icon" onClick={() => setShowMore(!showMore)} />
+                        {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`}>
+                          <div className='action'>Complete</div>
+                          <div className='action'>Edit</div>
+                          <div className='action' onClick={() => deleteTodo(todo.id)}>Delete</div>
+                        </div>}
+                      </div>
+                    </td>
+                  </tr>
 
-                  }
+                ))}
 
-                  {todos.length === 0 && (
-                    <div className='empty'>
-                      <p className='title'>No Task added</p>
-                      <span className='subtitle'>Task will show here when you have one.</span>
-                    </div>
-                  )}
-                </>
 
               </tbody>
-
-
-
             </table>
+            }
+
+            {todos.length === 0 && (
+              <div className='empty'>
+                <p className='title'>No Task added</p>
+                <span className='subtitle'>Task will show here when you have one.</span>
+              </div>
+            )}
           </div>
 
 
