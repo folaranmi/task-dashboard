@@ -49,7 +49,7 @@ function Dashboard() {
   }, [todos])
 
 
-  const { handleSubmit, errors, touched, values, handleChange } = useFormik({
+  const { handleSubmit, errors, touched, values, handleChange, dirty, isValid } = useFormik({
     // Set initial values
     initialValues: {
       taskTitle: '',
@@ -212,8 +212,8 @@ function Dashboard() {
                     <td>{dateFormat(todo.endDate, "mmm d, yyyy")}</td>
                     <td>{todo.hourBudgeted}</td>
                     <td className='flex'>
-                      <div className='status'>60% complete</div>
-                      <progress id="task-status" value="60" max="100"> </progress>
+                      <div className='status'>0% complete</div>
+                      <progress id="task-status" value="0" max="100"> </progress>
                     </td>
                     <td>
                       <div className="morebox">
@@ -323,7 +323,10 @@ function Dashboard() {
               </div>
 
               <div className="form-group savebtn">
-                <button type='submit' className='btn btn-primary' >Save</button>
+                <button 
+                  type='submit' 
+                  className='btn btn-primary' 
+                  disabled={!(dirty && isValid)}>Save</button>
               </div>
 
               <div className="divider"></div>
