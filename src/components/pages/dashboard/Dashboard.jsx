@@ -22,7 +22,14 @@ import LineChart from './LineChart';
 
 function Dashboard() {
 
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState({});
+
+  const toggleMore = (identifier) => {
+    setShowMore({
+      ...showMore,
+      [identifier]: !showMore[identifier],
+    });
+  }
 
   // get todos data
 
@@ -213,12 +220,13 @@ function Dashboard() {
                     <td>{todo.hourBudgeted}</td>
                     <td className='flex'>
                       <div className='status'>0% complete</div>
+
                       <progress id="task-status" value="0" max="100"> </progress>
                     </td>
                     <td>
                       <div className="morebox">
-                        <img src={MoreIconVertical} alt="more icon" onClick={() => setShowMore(!showMore)} />
-                        {showMore && <div className={`optionbox ${showMore ? 'active' : ''}`}>
+                        <img src={MoreIconVertical} alt="more icon" onClick={() => toggleMore(todo.id)} />
+                        {showMore[todo.id] === true && <div className={`optionbox ${showMore[todo.id] === true ? 'active' : ''}`}>
                           <div className='action'>Complete</div>
                           <div className='action'>Edit</div>
                           <div className='action' onClick={() => deleteTodo(todo.id)}>Delete</div>
