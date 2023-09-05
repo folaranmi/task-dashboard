@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Task Dashboard
 
-This Todo(task) dashboard project was created with React.JS, pure CSS & SASS. View [Live Demo](https://folaranmitodoapp.netlify.app/).
+This Todo(task) dashboard project was created with React.JS, pure CSS & SASS. View [Live Demo](https://task-dashboard-lyart.vercel.app/).
 
 ## Project Screenshot
 
